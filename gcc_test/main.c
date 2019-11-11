@@ -52,21 +52,29 @@ int main(int argn, char *arg[])
 			max_max_iter = iter > max_max_iter ? iter : max_max_iter;
 			max_iter[iter > (DISPLAY_ARR - 1) ? (DISPLAY_ARR - 1) : iter]++;
 			max_coeff[coeff > (DISPLAY_ARR - 1) ? (DISPLAY_ARR - 1) : coeff]++;
-			sum = 0;
-			printf("\033[A\033[A\r");
-			for (uint32_t i = 0; i < DISPLAY_ARR; i++)
+			if (x % 1000 == 0)
 			{
-				printf("%d\t", max_iter[i]);
-				sum += max_iter[i];
+				sum = 0;
+				printf("\033[A\033[A\r");
+				for (uint32_t i = 0; i < DISPLAY_ARR; i++)
+				{
+					printf("%d\t", max_iter[i]);
+					sum += max_iter[i];
+				}
+				printf("%d\n", sum);
+				for (uint32_t i = 0; i < DISPLAY_ARR; i++)
+					printf("%d\t", max_coeff[i]);
+				
+				printf("\nmaximum %d iteration", max_max_iter);
 			}
-			printf("%d\n", sum);
-			for (uint32_t i = 0; i < DISPLAY_ARR; i++)
-				printf("%d\t", max_coeff[i]);
-			
-			printf("\nmaximum %d iteration", max_max_iter);
 		}
-		else
+		else if (mode == MODE_GENERATOR)
 			print_binary32(ret);
+		if (x == UINT32_MAX)
+		{
+			printf("\nAll 32 bit combinations are tested.\n");
+			return 0;
+		}
 	}
 	return 0;
 }
