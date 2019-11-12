@@ -2,6 +2,7 @@
 #include "../preambula/preambula.h"
 #include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <string.h>
 
 const uint8_t protD_preambula[] =	{0x97, 0x15, 0x7A, 0x6F};
@@ -27,7 +28,22 @@ int main(int argn, char *arg[])
 	}
 
 	if (strcmp(arg[1], "generator") == 0)
+	{
 		mode = MODE_GENERATOR;
+	}
+	else if (strcmp(arg[1], "generator_with_id") == 0)
+	{
+		if (argn < 3)
+		{
+			printf("Too few arguments.");
+			return -1;
+		}
+		else
+		{
+			x = atoi(arg[2]);
+			mode = MODE_GENERATOR_WITH_ID;
+		}
+	}
 	else if (strcmp(arg[1], "statistic") == 0)
 		mode = MODE_STATISTIC;
 	else
@@ -70,7 +86,14 @@ int main(int argn, char *arg[])
 			}
 		}
 		else if (mode == MODE_GENERATOR)
+		{
 			print_binary32(ret);
+		}
+		else if (mode == MODE_GENERATOR_WITH_ID)
+		{
+			printf("%d\t", x - 1);
+			print_binary32(ret);
+		}
 		if (x == UINT32_MAX)
 		{
 			printf("\nAll 32 bit combinations are tested.\n");
