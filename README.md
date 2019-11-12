@@ -1,7 +1,7 @@
 # Seed based preambula (32bit) generator
 
-Maximum 66 iteration need for generate preambula with autocorrelation factor lower then 6.  
-Tested on seeds from 0 to 840 000 000  
+Maximum 65 iteration need for generate preambula with autocorrelation factor lower then 6.  
+Tested with all uint32_t range seeds.
 
 Atolic True Studio 9.2.0  
 Performance tests  

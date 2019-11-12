@@ -40,8 +40,7 @@ int main(int argn, char *arg[])
 	{
 		for (uint32_t i = 0; i < DISPLAY_ARR; i++)
 			printf("%d\t", i);
-		printf("sum");
-		printf("\n\n\n");
+		printf("sum\n\n\n");
 	}
 
 	while (1)
@@ -52,6 +51,8 @@ int main(int argn, char *arg[])
 			max_max_iter = iter > max_max_iter ? iter : max_max_iter;
 			max_iter[iter > (DISPLAY_ARR - 1) ? (DISPLAY_ARR - 1) : iter]++;
 			max_coeff[coeff > (DISPLAY_ARR - 1) ? (DISPLAY_ARR - 1) : coeff]++;
+			if (iter >= MAX_ITER / 2)
+				printf("\n%d\n\n\n", x - 1);
 			if (x % 1000 == 0)
 			{
 				sum = 0;
