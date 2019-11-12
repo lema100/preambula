@@ -30,19 +30,14 @@ int main(int argn, char *arg[])
 	if (strcmp(arg[1], "generator") == 0)
 	{
 		mode = MODE_GENERATOR;
+		if (argn >= 3)
+			x = atoi(arg[2]);
 	}
 	else if (strcmp(arg[1], "generator_with_id") == 0)
 	{
-		if (argn < 3)
-		{
-			printf("Too few arguments.");
-			return -1;
-		}
-		else
-		{
+		mode = MODE_GENERATOR_WITH_ID;
+		if (argn >= 3)
 			x = atoi(arg[2]);
-			mode = MODE_GENERATOR_WITH_ID;
-		}
 	}
 	else if (strcmp(arg[1], "statistic") == 0)
 		mode = MODE_STATISTIC;
@@ -55,7 +50,7 @@ int main(int argn, char *arg[])
 	if (mode == MODE_STATISTIC)
 	{
 		for (uint32_t i = 0; i < DISPLAY_ARR; i++)
-			printf("%d\t", i);
+			printf("%u\t", i);
 		printf("sum\n\n\n");
 	}
 
@@ -68,21 +63,21 @@ int main(int argn, char *arg[])
 			max_iter[iter > (DISPLAY_ARR - 1) ? (DISPLAY_ARR - 1) : iter]++;
 			max_coeff[coeff > (DISPLAY_ARR - 1) ? (DISPLAY_ARR - 1) : coeff]++;
 			if (iter >= MAX_ITER / 2)
-				printf("\n%d\n\n\n", x - 1);
+				printf(ANSI_COLOR_RED "\nid %u iteration %u\n\n\n" ANSI_COLOR_RESET, x - 1, iter);
 			if (x % 1000 == 0)
 			{
 				sum = 0;
 				printf("\033[A\033[A\r");
 				for (uint32_t i = 0; i < DISPLAY_ARR; i++)
 				{
-					printf("%d\t", max_iter[i]);
+					printf("%u\t", max_iter[i]);
 					sum += max_iter[i];
 				}
-				printf("%d\n", sum);
+				printf("%u\n", sum);
 				for (uint32_t i = 0; i < DISPLAY_ARR; i++)
-					printf("%d\t", max_coeff[i]);
+					printf("%u\t", max_coeff[i]);
 				
-				printf("\nmaximum %d iteration", max_max_iter);
+				printf(ANSI_COLOR_YELLOW "\nmaximum %u iteration" ANSI_COLOR_RESET, max_max_iter);
 			}
 		}
 		else if (mode == MODE_GENERATOR)
@@ -91,12 +86,12 @@ int main(int argn, char *arg[])
 		}
 		else if (mode == MODE_GENERATOR_WITH_ID)
 		{
-			printf("%d\t", x - 1);
+			printf(ANSI_COLOR_YELLOW "%u\t" ANSI_COLOR_RESET, x - 1);
 			print_binary32(ret);
 		}
 		if (x == UINT32_MAX)
 		{
-			printf("\nAll 32 bit combinations are tested.\n");
+			printf(ANSI_COLOR_GREEN "\nAll 32 bit combinations are tested.\n" ANSI_COLOR_RESET);
 			return 0;
 		}
 	}
