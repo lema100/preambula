@@ -58,18 +58,18 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define LCD_DCLK_Pin GPIO_PIN_1
-#define LCD_DCLK_GPIO_Port GPIOB
-#define LED_Pin GPIO_PIN_8
-#define LED_GPIO_Port GPIOA
-#define LCD_LCLK_Pin GPIO_PIN_4
-#define LCD_LCLK_GPIO_Port GPIOB
-#define LCD_DIN_Pin GPIO_PIN_5
-#define LCD_DIN_GPIO_Port GPIOB
-#define LCD_LOAD_Pin GPIO_PIN_6
-#define LCD_LOAD_GPIO_Port GPIOB
-#define LCD_PWR_Pin GPIO_PIN_7
-#define LCD_PWR_GPIO_Port GPIOB
+#define LCD_DCLK_Pin 		GPIO_PIN_1
+#define LCD_DCLK_GPIO_Port 	GPIOB
+#define LED_Pin 			GPIO_PIN_8
+#define LED_GPIO_Port 		GPIOA
+#define LCD_LCLK_Pin 		GPIO_PIN_4
+#define LCD_LCLK_GPIO_Port 	GPIOB
+#define LCD_DIN_Pin 		GPIO_PIN_5
+#define LCD_DIN_GPIO_Port 	GPIOB
+#define LCD_LOAD_Pin 		GPIO_PIN_6
+#define LCD_LOAD_GPIO_Port 	GPIOB
+#define LCD_PWR_Pin 		GPIO_PIN_7
+#define LCD_PWR_GPIO_Port 	GPIOB
 /* USER CODE BEGIN Private defines */
 
 #define SetDin		HAL_GPIO_WritePin(LCD_DIN_GPIO_Port, LCD_DIN_Pin, GPIO_PIN_SET)
