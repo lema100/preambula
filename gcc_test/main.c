@@ -8,7 +8,7 @@
 const uint8_t protD_preambula[] =	{0x97, 0x15, 0x7A, 0x6F};
 const uint8_t bad_preambula[] =		{0xff, 0xff, 0x00, 0x00};
 
-uint32_t max_iter[DISPLAY_ARR], max_coeff[DISPLAY_ARR], x, sum, max_max_iter;
+uint32_t max_iter[DISPLAY_ARR], max_coeff[DISPLAY_ARR], x, sum, max_max_iter, find;
 uint32_t ret, coeff, iter, mode;
 
 void print_binary32(uint32_t data)
@@ -38,6 +38,14 @@ int main(int argn, char *arg[])
 		mode = MODE_GENERATOR_WITH_ID;
 		if (argn >= 3)
 			x = atoi(arg[2]);
+	}
+	else if (strcmp(arg[1], "find_preambula") == 0)
+	{
+		mode = MODE_FIND_PREAMBULA;
+		if (argn >= 3)
+			find = strtoul(arg[2], NULL, 16);
+		printf("Try to find preambula 0x%08x\n", find);
+		fflush(stdout);
 	}
 	else if (strcmp(arg[1], "statistic") == 0)
 		mode = MODE_STATISTIC;
@@ -83,6 +91,16 @@ int main(int argn, char *arg[])
 		else if (mode == MODE_GENERATOR)
 		{
 			print_binary32(ret);
+		}
+		else if (mode == MODE_FIND_PREAMBULA)
+		{
+			if (find == ret)
+			{
+				printf(ANSI_COLOR_YELLOW "\r%u\t" ANSI_COLOR_RESET, x - 1);
+				print_binary32(ret);
+			}
+			else
+				printf(ANSI_COLOR_GREEN "\r%u", x - 1);
 		}
 		else if (mode == MODE_GENERATOR_WITH_ID)
 		{
